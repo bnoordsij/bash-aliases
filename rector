@@ -1,8 +1,0 @@
-
-alias grect='~/.composer/vendor/bin/rector process'
-alias rector='./vendor/bin/rector'
-alias gcs='~/.composer/vendor/bin/phpcs'
-alias gcbf='~/.composer/vendor/bin/phpcbf --parallel=16'
-alias cbf='./vendor/bin/phpcbf --parallel=16 '
-alias phpcs='./vendor/bin/phpcs'
-alias crcc='./vendor/bin/composer-require-checker check --config-file=ci/config/composer-require-checker.json; '
