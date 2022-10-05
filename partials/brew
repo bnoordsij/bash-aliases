@@ -1,0 +1,11 @@
+
+alias blist='brew services list '
+alias rrphp='brew services restart php@8.0;'
+alias rrphp7='brew services restart php@7.4;'
+alias rrphp8='brew services restart php@8.0;'
+alias rrphp81='brew services restart php@8.1;'
+alias rrphp1='brew services restart php@8.1;'
+alias rrngin='brew services restart nginx;'
+alias rrnginx='brew services restart nginx;'
+alias rrmariadb='brew services restart mariadb;'
+alias rrredis='brew services restart redis;'

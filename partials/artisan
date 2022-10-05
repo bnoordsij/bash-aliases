@@ -1,0 +1,19 @@
+
+alias p='php '
+alias a='php artisan '
+alias art='a '
+
+alias alr='a lock:release'
+alias akey='a key:generate'
+alias avi='a vacancy:import'
+alias avli='a vacancy:legacy-import'
+alias avbp='a vacancy:build-pages'
+alias ardi='a rudder:database-import'
+
+alias arlist='a route:list --quiet && echo "Success" || a route:list; '
+alias are='arlist'
+
+alias rseed='a rudder:seed continuous_seeder'
+
+alias phpunit="vendor/bin/phpunit"
+alias utest="phpunit"
