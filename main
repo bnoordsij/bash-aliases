@@ -1,10 +1,10 @@
 BASH_ALIASES=1
 
-source ./artisan
-source ./brew
-source ./cd
-source ./composer
-source ./general
-source ./general_functions
-source ./git
-source ./rector
+source ~/bash-alias/artisan
+source ~/bash-alias/brew
+source ~/bash-alias/cd
+source ~/bash-alias/composer
+source ~/bash-alias/general
+source ~/bash-alias/general_functions
+source ~/bash-alias/git
+source ~/bash-alias/rector
