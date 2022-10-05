@@ -1,0 +1,10 @@
+BASH_ALIASES=1
+
+source ./artisan
+source ./brew
+source ./cd
+source ./composer
+source ./general
+source ./general_functions
+source ./git
+source ./rector
