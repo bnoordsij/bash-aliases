@@ -21,6 +21,7 @@ alias cddef='cd /Users/bart/dev/klanten/werkenbijdefensie.nl; '
 alias cdbel='cd /Users/bart/dev/klanten/werkenbijdebelastingdienst.nl; '
 alias cddelo='cd /Users/bart/dev/klanten/werkenbijdeloitte.nl; '
 alias cddnb='cd /Users/bart/dev/klanten/werkenbijdnb.nl; '
+alias cdhop='cd /Users/bart/dev/klanten/werkenbijhoppenbrouwers.nl; '
 alias cdxx='cd /Users/bart/dev/klanten/; '
 
 ## relative

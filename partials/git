@@ -25,7 +25,24 @@ alias gtdf="git diff ':(exclude)composer.lock' ':(exclude)package-lock.json'; "
 
 gtac()
 {
-    gtam "$@";
+    tmp=$@
+    gtam $tmp;
+}
+
+gtchrel()
+{
+    out=$(gtchd)
+    out=$(gtpl)
+    release=
+    git branch -a | grep remotes/origin/release | tail -1 | sed 's~remotes/origin/~~' | read release
+    if [[ -z $release ]] then;
+        echo No release branch found;
+        return 1;
+        # exit; # this is too hard
+    fi
+    gtch $release
+    out=$(gtpl)
+    return 0; # success
 }
 
 gmdev()

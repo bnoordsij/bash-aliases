@@ -1,8 +1,9 @@
 
 ## use these at your own risk
-#alias cr='composer require --no-scripts '
-#alias ci='composer install --no-scripts;'
-#alias cu='composer update -n --no-scripts;'
+alias cr='composer require --no-scripts '
+alias ci='composer install --no-scripts;'
+alias cu='composer update -n --no-scripts;'
+alias cwu='composer update -n -W --no-scripts;'
 alias csi='composer install;'
 alias csu='composer update -n;'
 alias cenv='composer update-env;'
@@ -10,4 +11,3 @@ alias cdu='composer dumpautoload -n;'
 alias cod='composer outdated -D;'
 alias codm='composer outdated -D --minor-only;'
 alias codp='composer outdated -D --patch-only;'
-

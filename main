@@ -1,5 +1,7 @@
 BASH_ALIASES=1
 
+alias rrbash='source ~/bash-alias/main'
+
 source ~/bash-alias/partials/artisan
 source ~/bash-alias/partials/brew
 source ~/bash-alias/partials/cd
