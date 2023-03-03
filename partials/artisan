@@ -10,8 +10,9 @@ alias avli='a vacancy:legacy-import'
 alias avbp='a vacancy:build-pages'
 alias ardi='a rudder:database-import'
 
-alias arlist='a route:list --quiet && echo "Success" || a route:list; '
+alias arlist='a route:list --quiet --path=login2 && echo "Success" || a route:list; '
 alias are='arlist'
+alias arev='a route:list -vvv;'
 
 alias rseed='a rudder:seed continuous_seeder'
 
