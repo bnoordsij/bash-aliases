@@ -1,5 +1,11 @@
 
-alias gtt='git status'
+gttcolor()
+{
+    git status -s -b --porcelain | sed -r 's/^(..) (.*)/\1 $(printf '\\e[1;%dm' $(if [ \2 == \" \" ]; then echo \"30\"; else echo \"31\"; fi))\2$(printf '\\e[0m')/'
+}
+
+
+alias gtt='git status --porcelain=1 -b'
 alias gtst='git status'
 alias gtpl='git pull'
 alias gtps='git push'
@@ -10,6 +16,9 @@ alias gtspp='git stash pop'
 alias gtrh='git reset --hard; '
 alias gtr1='git reset HEAD~1; '
 
+alias gtb='git branch '
+alias gtba='git branch -a;'
+alias gtbb='git checkout -b'
 alias gtch--='git checkout develop -- '
 alias gtch='git checkout '
 alias gtchd='git checkout develop; '
@@ -17,16 +26,38 @@ alias gtchcu='git checkout automation/composer-update; '
 alias gtchct='git checkout request/client-testing; '
 alias gtchbm='git checkout automation/base-merge; '
 alias gtchm='git checkout master; '
+alias gtchtm='git checkout --track origin/master; '
 
 alias gtaa='git commit -a; '
 alias gtam='git commit -am '
 alias gtcm='git commit -m '
 alias gtdf="git diff ':(exclude)composer.lock' ':(exclude)package-lock.json'; "
+alias gmth="git checkout --theirs "
+alias gmthl="gmth composer.lock; "
 
 gtac()
 {
     tmp=$@
     gtam $tmp;
+}
+
+
+gtclk()
+{
+    tmp=$@
+    git clone git@git.maximum.nl:klanten/$tmp;
+}
+
+gtclpkg()
+{
+    tmp=$@
+    git clone git@git.maximum.nl:laravel-packages/$tmp;
+}
+
+gtclmod()
+{
+    tmp=$@
+    git clone git@git.maximum.nl:ruddercms/$tmp;
 }
 
 gtchrel()
@@ -63,5 +94,5 @@ gmdev()
     if [[ ! -z $has_changes ]]; then
         git stash pop;
     fi
-    rg '<<<<<<' || echo 'rg all good';
+    rgg;
 }
