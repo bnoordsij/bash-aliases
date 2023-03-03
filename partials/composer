@@ -1,4 +1,3 @@
-
 ## use these at your own risk
 alias cr='composer require --no-scripts '
 alias ci='composer install --no-scripts;'
@@ -11,3 +10,9 @@ alias cdu='composer dumpautoload -n;'
 alias cod='composer outdated -D;'
 alias codm='composer outdated -D --minor-only;'
 alias codp='composer outdated -D --patch-only;'
+alias codj='composer outdated -D --format=json | jq -r '\''.installed[] | .name + " " + (.latest|sub("^";""))'\'' | awk '\''{printf "\"%s\": \"^%s\",\n", $1, $2} END{printf "\"\": \"\""}'\'' | sed '\''s/\^v/^/'\'''
+
+alias clu='composer update --no-install --no-scripts;'
+
+alias cb='composer bump'
+
