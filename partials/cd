@@ -22,16 +22,22 @@ alias cdbel='cd /Users/bart/dev/klanten/werkenbijdebelastingdienst.nl; '
 alias cddelo='cd /Users/bart/dev/klanten/werkenbijdeloitte.nl; '
 alias cddnb='cd /Users/bart/dev/klanten/werkenbijdnb.nl; '
 alias cdhop='cd /Users/bart/dev/klanten/werkenbijhoppenbrouwers.nl; '
+alias cdenex='cd /Users/bart/dev/klanten/werkenbijenexis.nl; '
 alias cdxx='cd /Users/bart/dev/klanten/; '
 
 ## relative
 alias cdrmod='cd ./vendor/laravel-modules; '
 alias cdrpkg='cd ./vendor/maximum; '
 
+alias cdrsite='cd ./vendor/maximum/sitemap; '
+alias cdrfeed='cd ./vendor/maximum/feed; '
+
 alias cdrcore='cd ./vendor/laravel-modules/core; '
 alias cdrcomp='cd ./vendor/laravel-modules/component; '
 alias cdrvac='cd ./vendor/laravel-modules/vacancy; '
 alias cdrpage='cd ./vendor/laravel-modules/page; '
+alias cdrevent='cd ./vendor/laravel-modules/event; '
+alias cdrroute='cd ./vendor/laravel-modules/routing; '
 
 function mcd
 {
