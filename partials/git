@@ -78,7 +78,7 @@ gmdev()
     if [[ ! -z $has_changes ]]; then
         git stash pop;
     fi
-    rgg;
+    rgg
 }
 
 gtchrel()
@@ -87,7 +87,7 @@ gtchrel()
     out=$(gtpl)
     release=
     git branch -a | grep remotes/origin/release | tail -1 | sed 's~remotes/origin/~~' | read release
-    if [[ -z $release ]] then;
+    if [[ -z $release ]]; then
         echo No release branch found;
         return 1;
         # exit; # this is too hard
