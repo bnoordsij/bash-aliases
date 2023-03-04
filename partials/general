@@ -7,7 +7,7 @@ alias nnch='nn +5 changelog.md'
 alias nncj='nn +33 composer.json'
 alias nncl='nn composer.lock'
 
-
+alias week="date +%V"
 alias now='date +"%T"'
 
 alias init='~/dev/scripts/bin/rudder_init.sh'
@@ -26,10 +26,6 @@ alias nncini='sudo nano /usr/local/etc/php/8.1/php-cli.ini'
 alias gw='npm run watch'
 
 alias rmbt='rm -fr bootstrap/cache/*'
-
-## always require confirm on delete command
-#alias rm='rm -i'
-
 
 BLACK='\033[0;30m'
 RED='\033[0;31m'
