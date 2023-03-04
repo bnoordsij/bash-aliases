@@ -1,4 +1,4 @@
-# Bash alias
+# Bash aliases
 These are some aliases / functions that I use to make my life easier, you might find some useful, some not so much
 
 ## Getting started
@@ -18,9 +18,18 @@ in that case you must make a symlink to the folder, otherwise the relations won'
 ln -s ~/code/scripts/bash-aliases ~/bash-aliases
 ```
 
-you need to check the folders in the cd file, they are specifically set for me
+## cd
+there used to be a file called cd, it contained specific aliases for cd'ing to certain folders, but only for my Mac
+you can add your own cd file, if it exists it will be loaded.
 
-you can replace some with the following command:
+These were some aliases that were in there to give you an idea:
 ```
-sed -i 's-/Users/bart/dev-/Users/user_dir-' cd
+## absolute
+alias cddown='cd /Users/bart/Downloads/; '
+alias cddev='cd /Users/bart/dev/; '
+alias cdtu='cd /Users/bart/dev/klanten/werkenbijtechnischeunie.nl; '
+
+## relative
+alias cdrmod='cd ./vendor/laravel-modules; '
+alias cdrcore='cd ./vendor/laravel-modules/core; '
 ```
