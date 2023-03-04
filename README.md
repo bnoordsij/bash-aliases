@@ -21,4 +21,6 @@ ln -s ~/code/scripts/bash-aliases ~/bash-aliases
 you need to check the folders in the cd file, they are specifically set for me
 
 you can replace some with the following command:
-`sed -i 's-/Users/bart/dev-/Users/user_dir-' cd`
+```
+sed -i 's-/Users/bart/dev-/Users/user_dir-' cd
+```
