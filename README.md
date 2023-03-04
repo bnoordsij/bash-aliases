@@ -33,3 +33,10 @@ alias cdtu='cd /Users/bart/dev/klanten/werkenbijtechnischeunie.nl; '
 alias cdrmod='cd ./vendor/laravel-modules; '
 alias cdrcore='cd ./vendor/laravel-modules/core; '
 ```
+
+## local
+If you have your own bash_aliases it is recommended to put them in the local file
+
+this will keep it organized
+
+it is the last script that is run, so every command should be available to you

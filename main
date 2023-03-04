@@ -5,11 +5,15 @@ alias rrbash='source ~/bash-aliases/main'
 source ~/bash-aliases/partials/artisan
 source ~/bash-aliases/partials/brew
 source ~/bash-aliases/partials/base_cd
-if [ -f ~/bash-aliases/partials/cd ]; then
-    source ~/bash-aliases/partials/cd
-fi
 source ~/bash-aliases/partials/composer
 source ~/bash-aliases/partials/general
 source ~/bash-aliases/partials/general_functions
 source ~/bash-aliases/partials/git
 source ~/bash-aliases/partials/rector
+
+if [ -f ~/bash-aliases/partials/cd ]; then
+    source ~/bash-aliases/partials/cd
+fi
+if [ -f ~/bash-aliases/partials/local ]; then
+    source ~/bash-aliases/partials/local
+fi
