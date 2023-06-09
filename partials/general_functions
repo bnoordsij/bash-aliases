@@ -47,3 +47,20 @@ extract ()
     echo "'$1' is not a valid file!"
   fi
 }
+
+# most useful in loop
+# @todo: add replace for camel/snake/kebab case as well
+# duplicate app/Repositories/DepartmentRepository.php Department WorkArea
+# duplicate app/Repositories/DepartmentRepository.php Department $resource
+duplicate()
+{
+  source_file="$1"
+  search="$2"
+  replace="$3"
+
+  dest_file="${source_file/$search/$replace}"
+
+  # Copy the file and replace all instances of Department with Company in the destination file
+  cp "$source_file" "$dest_file"
+  sed -i "s/$search/$replace/g" "$dest_file"
+}
