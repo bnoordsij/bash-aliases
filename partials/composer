@@ -16,3 +16,6 @@ alias clu='composer update --no-install --no-scripts'
 
 alias cb='composer bump'
 
+# note that php 8.2.5 will also be converted to php 8.2
+# after running this, should still manually check the composer.json
+alias cbr='cb; perl -i -pe "s~(\d+\.\d+)\.\d+~\$1~g" composer.json'
