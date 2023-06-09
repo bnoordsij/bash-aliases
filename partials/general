@@ -1,11 +1,13 @@
 alias lf='ls -F'
 alias ll='lsl'
 alias lsl='ls -lAhF --color --group-directories-first'
+alias lsd='ls -d */'
 
 alias nn='nano'
 alias nnch='nn +5 changelog.md'
 alias nncj='nn +33 composer.json'
 alias nncl='nn composer.lock'
+alias nn.='nn .env'
 
 alias week="date +%V"
 alias now='date +"%T"'
@@ -46,6 +48,6 @@ echopu() { tmp=$@; echo ${PURPLE}$tmp${NC}; }
 echocn() { tmp=$@; echo ${CYAN}$tmp${NC}; }
 echoyw() { tmp=$@; echo ${YELLOW}$tmp${NC}; }
 
-alias forgtt='for dir in $(ls); do; cd $dir && echocn $dir; gtt; ..; done;'
-alias forgtrh='for dir in $(ls); do; cd $dir && echocn $dir; gtrh; gtchd; gtpl; ..; done;'
-alias forgtpl='for dir in $(ls); do; cd $dir && echocn $dir; gtpl; ..; done;'
+alias forgtt='for dir in $(lsd); do; cd $dir && echocn $dir; gtt; ..; done;'
+alias forgtrh='for dir in $(lsd); do; cd $dir && echocn $dir; gtrh; gtchd; gtpl; ..; done;'
+alias forgtpl='for dir in $(lsd); do; cd $dir && echocn $dir; gtpl; ..; done;'
