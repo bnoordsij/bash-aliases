@@ -35,6 +35,8 @@ alias gtdf="git diff ':(exclude)composer.lock' ':(exclude)package-lock.json' "
 alias gmth="git checkout --theirs "
 alias gmthl="gmth composer.lock "
 
+alias ideaignore="[[ -d .idea ]] && echo '*' > .idea/.gitignore; "
+
 gtac()
 {
     tmp=$@
@@ -95,4 +97,51 @@ gtchrel()
     gtch $release
     out=$(gtpl)
     return 0; # success
+}
+
+clean_git()
+{
+    git for-each-ref --format='%(refname:short)' refs/heads | while read branch; do
+        if [[ "$branch" != "develop" && "$branch" != "master" && -z "$(git log -1 --since='1 month ago' --format='%H' "$branch")" ]]; then
+            # echord "Deleting branch: $branch";
+            gtb -D $branch;
+        fi
+    done
+}
+
+reset_git_dry() {
+    remotes=($(git remote -v | awk '{print $1 "::::" $2}' | uniq))
+
+    echo rm -rf .git
+    echo git init -q
+    echo gtb -M master
+
+    for remote in $remotes; do
+        echo git remote add "${remote%::::*}" "${remote#*::::}"
+    done
+
+    # assumes origin is used as defsault over base
+    echo git fetch
+    echo git add -A
+    echo gtchd
+    echo gtpl
+
+}
+
+reset_git() {
+    remotes=($(git remote -v | awk '{print $1 "::::" $2}' | uniq))
+
+    rm -rf .git
+    git init -q
+    gtb -M master
+
+    for remote in $remotes; do
+        git remote add "${remote%::::*}" "${remote#*::::}"
+    done
+
+    # assumes origin is used as defsault over base
+    git fetch
+    git add -A
+    gtchd
+    gtpl
 }
