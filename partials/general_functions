@@ -47,3 +47,119 @@ extract ()
     echo "'$1' is not a valid file!"
   fi
 }
+
+#run like:
+#duplicate $file $search $replace
+#duplicate app\Models\Department.php Department WorkArea
+
+escape_special_characters() {
+    local str="$@"
+    local escaped_str=""
+
+    for (( i=0; i<${#str}; i++ )); do
+        char="${str:i:1}"
+        if [[ $char =~ [[:space:]] ]]; then
+            escaped_str+="\\s"
+        elif [[ $char =~ [^a-zA-Z0-9] ]]; then
+            escaped_str+="\\$char"
+        else
+            escaped_str+="$char"
+        fi
+    done
+
+    echo "$escaped_str"
+}
+
+alias esc=escape_special_characters
+
+replacex()
+{
+  file="$1"
+  find="$2"
+  replace="$3"
+
+  if [ ! -f $file ]; then
+    echo "File ${file} does not exist";
+    return 1;
+  fi
+
+  # -i does not seem to work in bash
+  echo "s~${find}~${replace}~"
+  sed -e "s~${find}~${replace}~" ${file} > tmp.txt
+  mv tmp.txt ${file}
+}
+
+replace()
+{
+    replacex $1 $(esc "$2") "$3"
+}
+
+duplicate()
+{
+  source_file="$1"
+  search="$2"
+  replace="$3"
+
+  dest_file="${source_file/$search/$replace}"
+
+  # Copy the file and replace all instances of Department with Company in the destination file
+  cp "$source_file" "$dest_file"
+  sed -i -e "s/$search/$replace/g" "$dest_file"
+#  sed -e "s/$search/$replace/g" "source_file" > "$dest_file"
+  rm $dest_file-e
+}
+
+#run like:
+#duplicate_all Department
+#duplicate_all Department $files $replacements
+
+
+duplicate_all()
+{
+  if [ -z "$1" ]; then
+    echo "please provide a search string"
+    return
+  fi
+
+  search=$1
+#  files=$2
+#  replacements=$3
+  if [ -z "$2" ]; then
+    duplicate_files=${files[@]}
+  else
+    duplicate_files=${2[@]}
+  fi
+  if [ -z "$3" ]; then
+    duplicate_replacements=${replacements[@]}
+  else
+    duplicate_replacements=${3[@]}
+  fi
+
+  # check empty arrays
+  if [ ${#duplicate_files} -eq 0 ]; then
+    echo "pass in an array of files or set files=(...)"
+    return
+  fi
+
+  if [ ${#duplicate_replacements} -eq 0 ]; then
+    echo "pass in an array of replacements or set replacements=(...)"
+    return
+  fi
+
+  echo 'Check these files before they are duplicated:'
+  for file in ${duplicate_files[@]};
+  do
+    echo $file 2;
+  done
+
+#  read "?Press enter to continue"
+
+  for file in ${duplicate_files[@]}
+  do
+    for replacement in ${duplicate_replacements[@]}
+    do
+      duplicate $file $search $replacement
+    done
+  done
+}
+
