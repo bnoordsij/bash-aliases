@@ -13,34 +13,97 @@ alias gtups='git push -u origin HEAD'
 alias gtsh='git stash'
 alias gtspp='git stash pop'
 
-alias gtrh='git reset --hard; '
-alias gtr1='git reset HEAD~1; '
+alias gtrh='git reset --hard '
+alias gtr1='git reset HEAD~1 '
 
 alias gtb='git branch '
-alias gtba='git branch -a;'
+alias gtba='git branch -a'
 alias gtbb='git checkout -b'
 alias gtch--='git checkout develop -- '
 alias gtch='git checkout '
-alias gtchd='git checkout develop; '
-alias gtchcu='git checkout automation/composer-update; '
-alias gtchct='git checkout request/client-testing; '
-alias gtchbm='git checkout automation/base-merge; '
-alias gtchm='git checkout master; '
-alias gtchtm='git checkout --track origin/master; '
+alias gtchd='git checkout develop '
+alias gtchcu='git checkout automation/composer-update '
+alias gtchct='git checkout request/client-testing '
+alias gtchbm='git checkout automation/base-merge '
+alias gtchm='git checkout master '
+alias gtchtm='git checkout --track origin/master '
 
-alias gtaa='git commit -a; '
-alias gtam='git commit -am '
+alias gtplbm='git pull base master'
+
+alias gtrbf='git config pull.rebase false'
+
+alias gtrest='git restore --staged'
+
+alias gtaa='git commit -a '
+alias gtaa='git commit -a '
 alias gtcm='git commit -m '
-alias gtdf="git diff ':(exclude)composer.lock' ':(exclude)package-lock.json'; "
+alias gtdf="git diff ':(exclude)composer.lock' ':(exclude)package-lock.json' "
+alias gtdfq='git diff --quiet'
 alias gmth="git checkout --theirs "
-alias gmthl="gmth composer.lock; "
+alias gmour="git checkout --ours "
+alias gmthl="gmth composer.lock "
+
+alias gtaccu="gtac updated composer packages"
+alias gtaccb="gtac composer bump"
+alias gtacch="gtac updated changelog"
+alias gtaccl="gtac cleanup"
+alias gtacoi="gtac fixed typoi"
+alias gtacrel="gtac updated release date"
+
+alias ideaignore="[[ -d .idea ]] && echo '*' > .idea/.gitignore; "
+alias nogit="[[ -f .gitignore ]] || echo '*' > .gitignore"
+
+git_checkout_latest_release() {
+  # Example array of branches (in real usage, this would come from `git branch -r`)
+  local branches=$(gtba)
+
+  # Extract the last branch that matches 'release/'
+  local release_branch=$(printf "%s\n" "${branches[@]}" | grep 'release/' | tail -n 1)
+
+  # Strip the 'remotes/origin/' prefix
+  release_branch=${release_branch#*remotes/origin/}
+
+  # Check out the branch
+  if [ -n "$release_branch" ]; then
+    git checkout "$release_branch"
+  else
+    echo "No release branch found to checkout."
+  fi
+}
+
+
+
+git_pull_checkout_latest() {
+  # Run git pull and capture the output
+  local output=$(git pull)
+
+  # Extract the last branch name
+  local branch=$(echo "$output" | grep -o '-> origin/[^ ]*' | tail -n 1 | sed 's/-> origin\///')
+
+  # Check out the branch
+  if [ -n "$branch" ]; then
+    git checkout "$branch"
+  else
+    echo "No branch found to checkout."
+  fi
+}
+
+# Create an alias for convenience
+alias gplc='git_pull_checkout_latest'
+
 
 gtac()
 {
     tmp=$@
-    gtam $tmp;
+    git commit -am "$tmp";
 }
 
+
+gtcl()
+{
+    tmp=$@
+    git clone git@git.maximum.nl:$tmp;
+}
 
 gtclk()
 {
@@ -66,9 +129,10 @@ gtchrel()
     out=$(gtpl)
     release=
     git branch -a | grep remotes/origin/release | tail -1 | sed 's~remotes/origin/~~' | read release
-    if [[ -z $release ]] then;
-        echo No release branch found;
-        return 1;
+    if [[ -z $release ]]; then
+#        echo No release branch found;
+        git_checkout_latest_release
+#        return 1;
         # exit; # this is too hard
     fi
     gtch $release
@@ -83,16 +147,64 @@ gmdev()
         return;
     fi
     has_changes=$(git diff --name-only);
-    if [[ ! -z $has_changes ]]; then
-        echo "stashing";
-        git stash;
-    fi
+#    if [[ ! -z $has_changes ]]; then
+#        echo "stashing";
+#        git stash;
+#    fi
     git checkout develop;
     git pull;
     git checkout -; # this is why we can't be on develop already
-    git merge develop; # first merge, than unstash, prevents commiting merge conflicts
+    git merge --no-commit develop; # first merge, than unstash, prevents commiting merge conflicts
     if [[ ! -z $has_changes ]]; then
-        git stash pop;
+        git stash pop
     fi
-    rgg;
+    rgg
+}
+
+reset_git_dry() {
+    remotes=($(git remote -v | awk '{print $1 "::::" $2}' | uniq))
+
+    echo rm -rf .git
+    echo git init -q
+    echo gtb -M master
+
+    for remote in $remotes; do
+        echo git remote add "${remote%::::*}" "${remote#*::::}"
+    done
+
+    # assumes origin is used as defsault over base
+    echo git fetch
+    echo git add -A
+    echo gtchd
+    echo gtpl
+
+}
+
+
+reset_git() {
+    remotes=($(git remote -v | awk '{print $1 "::::" $2}' | uniq))
+
+    rm -rf .git
+    git init -q
+    gtb -M master
+
+    for remote in $remotes; do
+        git remote add "${remote%::::*}" "${remote#*::::}"
+    done
+
+    # assumes origin is used as defsault over base
+    git fetch
+    git add -A
+    gtchd
+    gtpl
+}
+
+clean_git()
+{
+    git for-each-ref --format='%(refname:short)' refs/heads | while read branch; do
+        if [[ "$branch" != "develop" && "$branch" != "master" && -z "$(git log -1 --since='1 month ago' --format='%H' "$branch")" ]]; then
+            # echord "Deleting branch: $branch";
+            gtb -D $branch;
+        fi
+    done
 }
