@@ -4,17 +4,48 @@ alias a='php artisan '
 alias art='a '
 
 alias alr='a lock:release'
+alias alrv='a lock:release connection_manager_run'
 alias akey='a key:generate'
 alias avi='a vacancy:import'
 alias avli='a vacancy:legacy-import'
 alias avbp='a vacancy:build-pages'
 alias ardi='a rudder:database-import'
+alias awardi='a db:wipe; a rudder:database-import'
+alias arde='a rudder:database-export'
+alias ardiall='awardi; rseed; a seed; a cache:clear'
+alias acc='a cache:clear'
 
 alias arlist='a route:list --quiet --path=login2 && echo "Success" || a route:list; '
 alias are='arlist'
-alias arev='a route:list -vvv;'
+alias arev='a route:list -vvv'
 
 alias rseed='a rudder:seed continuous_seeder'
 
 alias phpunit="vendor/bin/phpunit"
 alias utest="phpunit"
+
+alias anews='a newsletter:create; sleep 1; a newsletter:send; a horizon'
+
+df()
+{
+    tmp=$@
+    a dusk --filter=$tmp
+}
+
+utestf()
+{
+    tmp=$@
+    utest --filter=$tmp
+}
+
+avid()
+{
+    tmp=$@
+    avi --delta-from=$tmp
+}
+
+arep()
+{
+    tmp=$@
+    a route:list --path=$tmp
+}
