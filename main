@@ -1,13 +1,19 @@
 BASH_ALIASES=1
 
-alias rrbash='source ~/bash-alias/main'
+alias rrbash='source ~/bash-aliases/main'
 
-source ~/bash-alias/partials/artisan
-source ~/bash-alias/partials/brew
-source ~/bash-alias/partials/cd
-source ~/bash-alias/partials/composer
-source ~/bash-alias/partials/general
-source ~/bash-alias/partials/general_functions
-source ~/bash-alias/partials/git
-source ~/bash-alias/partials/rector
-source ~/bash-alias/partials/local
+source ~/bash-aliases/partials/artisan
+source ~/bash-aliases/partials/brew
+source ~/bash-aliases/partials/base_cd
+source ~/bash-aliases/partials/composer
+source ~/bash-aliases/partials/general
+source ~/bash-aliases/partials/general_functions
+source ~/bash-aliases/partials/git
+source ~/bash-aliases/partials/rector
+
+if [ -f ~/bash-aliases/partials/cd ]; then
+    source ~/bash-aliases/partials/cd
+fi
+if [ -f ~/bash-aliases/partials/local ]; then
+    source ~/bash-aliases/partials/local
+fi

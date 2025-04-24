@@ -1,0 +1,27 @@
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+alias ..4='cd ../../../..'
+alias ..5='cd ../../../../..'
+
+alias home='cd ~; '
+
+
+function mcd
+{
+   mkdir -p $1 && cd $1;
+}
+
+## source: https://github.com/shitikanth/dotfiles/blob/a0261a4b64e2b27da095b8f26bf0567a8b19587f/_bashrc.functions
+# build cd first, than cd, allows cd - to still work properly
+up()
+{
+    LIMIT=$1
+    P=$PWD/..
+    for ((i=1; i < LIMIT; i++))
+    do
+      P=$P/..
+    done
+    cd $P
+}

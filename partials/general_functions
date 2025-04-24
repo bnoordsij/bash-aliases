@@ -94,6 +94,10 @@ replace()
     replacex $1 $(esc "$2") "$3"
 }
 
+# most useful in loop
+# @todo: add replace for camel/snake/kebab case as well
+# duplicate app/Repositories/DepartmentRepository.php Department WorkArea
+# duplicate app/Repositories/DepartmentRepository.php Department $resource
 duplicate()
 {
   source_file="$1"

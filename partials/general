@@ -33,6 +33,7 @@ alias nnchasw='nn +5 changelogs/aswatson-base.md'
 # overwrite grep with latest ggrep
 alias grep='ggrep'
 
+alias week="date +%V"
 alias now='date +"%T"'
 
 alias tf='terraform'
@@ -45,8 +46,9 @@ alias init='~/dev/scripts/bin/rudder_init.sh'
 alias search='~/dev/scripts/bin/rudder_search.sh'
 #alias search='~/dev/scripts/ci/helper-scripts/rudder_search.sh'
 alias rs='search'
-alias rgg='rg ">>>>>>" -m 3 || echogn "rg all good";'
-alias rgga='rg -. ">>>>>>" -m 3 || echogn "rg -. all good";'
+
+alias rgg='rg ">>>>>>" -m 3 || echogn "rg all good"'
+alias rgga='rg -. ">>>>>>" -m 3 || echogn "rg -. all good"'
 
 #alias ps='phpstorm'
 

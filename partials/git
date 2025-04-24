@@ -91,7 +91,6 @@ git_pull_checkout_latest() {
 # Create an alias for convenience
 alias gplc='git_pull_checkout_latest'
 
-
 gtac()
 {
     tmp=$@
@@ -179,7 +178,6 @@ reset_git_dry() {
     echo gtpl
 
 }
-
 
 reset_git() {
     remotes=($(git remote -v | awk '{print $1 "::::" $2}' | uniq))
