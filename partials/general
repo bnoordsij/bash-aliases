@@ -1,35 +1,92 @@
 alias lf='ls -F'
+alias l1='ls -1'
 alias ll='lsl'
-alias lsl='ls -lAhF --color --group-directories-first'
+alias lsl='ls -lAhF --color' # --group-directories-first'
+alias lsd='ls -d */'
 
-alias nn='nano'
+alias e='echo'
+alias ee='echo'
+alias nn='vim'
 alias nnch='nn +5 changelog.md'
 alias nncj='nn +33 composer.json'
 alias nncl='nn composer.lock'
+alias nn.='nn .env'
 
+alias kk='kubectl'
+alias ekk='eksctl'
+
+alias dcmp='docker-compose'
+alias dcmpup='dcmp up -d' # for reference
+alias dcmpdown='dcmp down' # for reference
+
+alias dk='docker'
+alias dkb='docker build .'
+alias dkbt='docker build . -t'
+dkbtr () {
+  name="$@"
+  docker build . -t $name && docker $name;
+}
+
+alias nnchact='nn +5 changelogs/action.jobs-base.md'
+alias nnchasw='nn +5 changelogs/aswatson-base.md'
+
+# overwrite grep with latest ggrep
+alias grep='ggrep'
 
 alias now='date +"%T"'
 
+alias tf='terraform'
+alias tfaaa='tf apply -auto-approve'
+alias tfddd='tf apply -auto-approve -destroy'
+
+alias chrom='~/dev/scripts/bin/chromedriver/chromedriver'
+alias chrom95='~/dev/scripts/bin/chromedriver/chromedriver --port=9515'
 alias init='~/dev/scripts/bin/rudder_init.sh'
 alias search='~/dev/scripts/bin/rudder_search.sh'
 #alias search='~/dev/scripts/ci/helper-scripts/rudder_search.sh'
 alias rs='search'
-alias rgg='rg ">>>>>>" || echogn "rg all good";'
+alias rgg='rg ">>>>>>" -m 3 || echogn "rg all good";'
+alias rgga='rg -. ">>>>>>" -m 3 || echogn "rg -. all good";'
 
-alias ps='phpstorm'
+#alias ps='phpstorm'
 
 alias nnalias='nano ~/.bash_aliases'
 alias nnini='sudo nano /usr/local/etc/php/8.1/php.ini'
 alias nncliini='sudo nano /usr/local/etc/php/8.1/php-cli.ini'
 alias nncini='sudo nano /usr/local/etc/php/8.1/php-cli.ini'
 
+alias clrnwidart='nano +203 ./vendor/nwidart/laravel-modules/src/FileRepository.php'
+
 alias gw='npm run watch'
 
 alias rmbt='rm -fr bootstrap/cache/*'
 
+alias rmlog='rm -f storage/logs/laravel.log'
+
+alias forerr='echo $dir >> ../for_error'
+
 ## always require confirm on delete command
 #alias rm='rm -i'
+alias rmf='rm -rf '
 
+alias mkhor='mkdir -p ./vendor/laravel/horizon/public'
+
+uniqify() {
+  sentence=$@
+  echo $sentence | tr [:upper:] [:lower:] | tr ' ' '\n' | sort | uniq
+}
+
+## assumes $source is set
+mvr() {
+  mv_file=$0
+  mv "$source$mv_file" $mv_file
+}
+
+cpr() {
+  cp_file=$0
+  echo $source1
+  cp "$source1$cp_file" $cp_file
+}
 
 BLACK='\033[0;30m'
 RED='\033[0;31m'
@@ -41,15 +98,18 @@ CYAN='\033[0;36m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echobk() { tmp=$@; echo ${BLACK}$tmp${NC}; }
-echord() { tmp=$@; echo ${RED}$tmp${NC}; }
-echogn() { tmp=$@; echo ${GREEN}$tmp${NC}; }
-echoor() { tmp=$@; echo ${ORANGE}$tmp${NC}; }
-echobu() { tmp=$@; echo ${BLUE}$tmp${NC}; }
-echopu() { tmp=$@; echo ${PURPLE}$tmp${NC}; }
-echocn() { tmp=$@; echo ${CYAN}$tmp${NC}; }
-echoyw() { tmp=$@; echo ${YELLOW}$tmp${NC}; }
+echobk() { tmp=$@; printf "${BLACK}$tmp${NC}\n"; }
+echord() { tmp=$@; printf "${RED}$tmp${NC}\n"; }
+echogn() { tmp=$@; printf "${GREEN}$tmp${NC}\n"; }
+echoor() { tmp=$@; printf "${ORANGE}$tmp${NC}\n"; }
+echobu() { tmp=$@; printf "${BLUE}$tmp${NC}\n"; }
+echopu() { tmp=$@; printf "${PURPLE}$tmp${NC}\n"; }
+echocn() { tmp=$@; printf "${CYAN}$tmp${NC}\n"; }
+echoyw() { tmp=$@; printf "${YELLOW}$tmp${NC}\n"; }
 
-alias forgtt='for dir in $(ls); do; cd $dir && echopu $dir; gtt; ..; done;'
-alias forgtrh='for dir in $(ls); do; cd $dir && echopu $dir; gtrh; gtchd; gtpl; ..; done;'
-alias forgtpl='for dir in $(ls); do; cd $dir && echopu $dir; gtpl; ..; done;'
+alias forgtt='for dir in $(lsd); do cd $dir && echopu $dir; gtt; ..; done;'
+alias forgtrh='for dir in $(lsd); do cd $dir && echopu $dir; gtrh; gtchd; gtpl; ..; done;'
+alias forgtpl='for dir in $(lsd); do cd $dir && echopu $dir; gtpl; ..; done;'
+alias forgtups='for dir in $(lsd); do cd $dir && echopu $dir; gtups; ..; done;'
+alias forfun='for dir in $(lsd); do cd $dir && echopu $dir; tmpfun; ..; done;'
+alias forfile='for dir in $(cat $lsd_file); do cd $dir && echopu $dir; tmpfun; ..; done;'
