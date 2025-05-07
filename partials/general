@@ -25,7 +25,7 @@ alias dkb='docker build .'
 alias dkbt='docker build . -t'
 dkbtr () {
   name="$*"
-  docker build . -t $name && docker $name;
+  docker build . -t $name && docker "$name";
 }
 
 alias nnchact='nn +5 changelogs/action.jobs-base.md'
@@ -66,7 +66,7 @@ alias rmbt='rm -fr bootstrap/cache/*'
 
 alias rmlog='rm -f storage/logs/laravel.log'
 
-alias forerr='echo $dir >> ../for_error'
+alias forerr='echo "$dir" >> ../for_error'
 
 ## always require confirm on delete command
 #alias rm='rm -i'
@@ -79,16 +79,16 @@ uniqify() {
   echo "$sentence" | tr "[:upper:]" "[:lower:]" | tr ' ' '\n' | sort | uniq
 }
 
-## assumes $source is set
+## assumes "$source" is set
 mvr() {
   mv_file=$0
-  mv "$source$mv_file" $mv_file
+  mv "$source$mv_file" "$mv_file"
 }
 
 cpr() {
   cp_file=$0
-  echo $source1
-  cp "$source1$cp_file" $cp_file
+  echo "$source1"
+  cp "$source1$cp_file" "$cp_file"
 }
 
 BLACK='\033[0;30m'
