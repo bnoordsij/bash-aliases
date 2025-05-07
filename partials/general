@@ -4,6 +4,7 @@ alias ll='lsl'
 alias lsl='ls -lAhF --color' # --group-directories-first'
 alias lsd='ls -d */'
 
+alias ]='clear'
 alias e='echo'
 alias ee='echo'
 alias nn='vim'
@@ -23,7 +24,7 @@ alias dk='docker'
 alias dkb='docker build .'
 alias dkbt='docker build . -t'
 dkbtr () {
-  name="$@"
+  name="$*"
   docker build . -t $name && docker $name;
 }
 
@@ -74,8 +75,8 @@ alias rmf='rm -rf '
 alias mkhor='mkdir -p ./vendor/laravel/horizon/public'
 
 uniqify() {
-  sentence=$@
-  echo $sentence | tr [:upper:] [:lower:] | tr ' ' '\n' | sort | uniq
+  sentence=$*
+  echo "$sentence" | tr "[:upper:]" "[:lower:]" | tr ' ' '\n' | sort | uniq
 }
 
 ## assumes $source is set
@@ -100,14 +101,14 @@ CYAN='\033[0;36m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echobk() { tmp=$@; printf "${BLACK}$tmp${NC}\n"; }
-echord() { tmp=$@; printf "${RED}$tmp${NC}\n"; }
-echogn() { tmp=$@; printf "${GREEN}$tmp${NC}\n"; }
-echoor() { tmp=$@; printf "${ORANGE}$tmp${NC}\n"; }
-echobu() { tmp=$@; printf "${BLUE}$tmp${NC}\n"; }
-echopu() { tmp=$@; printf "${PURPLE}$tmp${NC}\n"; }
-echocn() { tmp=$@; printf "${CYAN}$tmp${NC}\n"; }
-echoyw() { tmp=$@; printf "${YELLOW}$tmp${NC}\n"; }
+echobk() { tmp=$*; printf "${BLACK}%s${NC}\n" "$tmp"; }
+echord() { tmp=$*; printf "${RED}%s${NC}\n" "$tmp"; }
+echogn() { tmp=$*; printf "${GREEN}%s${NC}\n" "$tmp"; }
+echoor() { tmp=$*; printf "${ORANGE}%s${NC}\n" "$tmp"; }
+echobu() { tmp=$*; printf "${BLUE}%s${NC}\n" "$tmp"; }
+echopu() { tmp=$*; printf "${PURPLE}%s${NC}\n" "$tmp"; }
+echocn() { tmp=$*; printf "${CYAN}%s${NC}\n" "$tmp"; }
+echoyw() { tmp=$*; printf "${YELLOW}%s${NC}\n" "$tmp"; }
 
 alias forgtt='for dir in $(lsd); do cd $dir && echopu $dir; gtt; ..; done;'
 alias forgtrh='for dir in $(lsd); do cd $dir && echopu $dir; gtrh; gtchd; gtpl; ..; done;'
