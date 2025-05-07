@@ -1,7 +1,7 @@
 
 gttcolor()
 {
-    git status -s -b --porcelain | sed -r 's/^(..) (.*)/\1 $(printf '\\e[1;%dm' $(if [ \2 == \" \" ]; then echo \"30\"; else echo \"31\"; fi))\2$(printf '\\e[0m')/'
+    git status -s -b --porcelain
 }
 
 
@@ -55,10 +55,12 @@ alias nogit="[[ -f .gitignore ]] || echo '*' > .gitignore"
 
 git_checkout_latest_release() {
   # Example array of branches (in real usage, this would come from `git branch -r`)
-  local branches=$(gtba)
+  local branches
+  branches=$(gtba)
 
   # Extract the last branch that matches 'release/'
-  local release_branch=$(printf "%s\n" "${branches[@]}" | grep 'release/' | tail -n 1)
+  local release_branch
+  release_branch=$(printf "%s\n" "${branches[*]}" | grep 'release/' | tail -n 1)
 
   # Strip the 'remotes/origin/' prefix
   release_branch=${release_branch#*remotes/origin/}
@@ -75,10 +77,12 @@ git_checkout_latest_release() {
 
 git_pull_checkout_latest() {
   # Run git pull and capture the output
-  local output=$(git pull)
+  local output
+  output=$(git pull)
 
   # Extract the last branch name
-  local branch=$(echo "$output" | grep -o '-> origin/[^ ]*' | tail -n 1 | sed 's/-> origin\///')
+  local branch
+  branch=$(echo "$output" | grep -o '-> origin/[^ ]*' | tail -n 1 | sed 's/-> origin\///')
 
   # Check out the branch
   if [ -n "$branch" ]; then
@@ -93,33 +97,33 @@ alias gplc='git_pull_checkout_latest'
 
 gtac()
 {
-    tmp=$@
+    tmp=$*
     git commit -am "$tmp";
 }
 
 
 gtcl()
 {
-    tmp=$@
-    git clone git@git.maximum.nl:$tmp;
+    tmp=$*
+    git clone "git@git.maximum.nl:$tmp";
 }
 
 gtclk()
 {
-    tmp=$@
-    git clone git@git.maximum.nl:klanten/$tmp;
+    tmp=$*
+    git clone "git@git.maximum.nl:klanten/$tmp";
 }
 
 gtclpkg()
 {
-    tmp=$@
-    git clone git@git.maximum.nl:laravel-packages/$tmp;
+    tmp=$*
+    git clone "git@git.maximum.nl:laravel-packages/$tmp";
 }
 
 gtclmod()
 {
-    tmp=$@
-    git clone git@git.maximum.nl:ruddercms/$tmp;
+    tmp=$*
+    git clone "git@git.maximum.nl:ruddercms/$tmp";
 }
 
 gtchrel()
@@ -134,8 +138,12 @@ gtchrel()
 #        return 1;
         # exit; # this is too hard
     fi
-    gtch $release
+    gtch "$release"
     out=$(gtpl)
+
+    # do nothing with the output
+    ee "$out" > /dev/null
+
     return 0; # success
 }
 
@@ -161,13 +169,11 @@ gmdev()
 }
 
 reset_git_dry() {
-    remotes=($(git remote -v | awk '{print $1 "::::" $2}' | uniq))
-
     echo rm -rf .git
     echo git init -q
     echo gtb -M master
 
-    for remote in $remotes; do
+    for remote in $(git remote -v | awk '{print $1 "::::" $2}' | uniq); do
         echo git remote add "${remote%::::*}" "${remote#*::::}"
     done
 
@@ -180,13 +186,11 @@ reset_git_dry() {
 }
 
 reset_git() {
-    remotes=($(git remote -v | awk '{print $1 "::::" $2}' | uniq))
-
     rm -rf .git
     git init -q
     gtb -M master
 
-    for remote in $remotes; do
+    for remote in $(git remote -v | awk '{print $1 "::::" $2}' | uniq); do
         git remote add "${remote%::::*}" "${remote#*::::}"
     done
 
@@ -202,7 +206,7 @@ clean_git()
     git for-each-ref --format='%(refname:short)' refs/heads | while read branch; do
         if [[ "$branch" != "develop" && "$branch" != "master" && -z "$(git log -1 --since='1 month ago' --format='%H' "$branch")" ]]; then
             # echord "Deleting branch: $branch";
-            gtb -D $branch;
+            gtb -D "$branch";
         fi
     done
 }
