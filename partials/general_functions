@@ -9,14 +9,14 @@ cpenv()
     app_domain="${project_name}.test"
     app_slug=$(echo "${project_name}" | perl -pe 's/(_|\.)/-/g')
 
-    sed -i -e "s/\[APP_NAME\]/${project_name}/g" .env
-    sed -i -e "s/\[APP_SLUG\]/${app_slug}/g" .env
-    sed -i -e "s/\[APP_DOMAIN\]/${app_domain}/g" .env
-    sed -i -e "s/\[DB_DATABASE\]/${app_slug}/g" .env
-    sed -i -e "s/\[MAIL_FROM_ADDRESS\]/${app_slug}\@maximum.nl/g" .env
-    sed -i -e "s/\[MAIL_FROM_NAME\]/${app_slug}/g" .env
-    sed -i -e "s/\[DATABASE_DUMPER_READ_KEY\]/Z4FIK87GKRVR1DQ32V0G/g" .env
-    sed -i -e "s/\[DATABASE_DUMPER_READ_SECRET\]/00CxNnJd5DCaGxv0i9skmcMPJOzG5UgesnKF4p1e/g" .env
+    sed -i '' "s/\[APP_NAME\]/${project_name}/g" .env
+    sed -i '' "s/\[APP_SLUG\]/${app_slug}/g" .env
+    sed -i '' "s/\[APP_DOMAIN\]/${app_domain}/g" .env
+    sed -i '' "s/\[DB_DATABASE\]/${app_slug}/g" .env
+    sed -i '' "s/\[MAIL_FROM_ADDRESS\]/${app_slug}\@maximum.nl/g" .env
+    sed -i '' "s/\[MAIL_FROM_NAME\]/${app_slug}/g" .env
+    sed -i '' "s/\[DATABASE_DUMPER_READ_KEY\]/Z4FIK87GKRVR1DQ32V0G/g" .env
+    sed -i '' "s/\[DATABASE_DUMPER_READ_SECRET\]/00CxNnJd5DCaGxv0i9skmcMPJOzG5UgesnKF4p1e/g" .env
 }
 
 function tt
@@ -29,18 +29,18 @@ extract ()
 {
   if [ -f $1 ] ; then
     case $1 in
-      *.tar.bz2)   tar xvjf $1    ;;
-      *.tar.gz)    tar xvzf $1    ;;
-      *.tar.xz)    tar Jxvf $1    ;;
-      *.bz2)       bunzip2 $1     ;;
-      *.rar)       rar x $1       ;;
-      *.gz)        gunzip $1      ;;
-      *.tar)       tar xvf $1     ;;
-      *.tbz2)      tar xvjf $1    ;;
-      *.tgz)       tar xvzf $1    ;;
-      *.zip)       unzip -d `echo $1 | sed 's/\(.*\)\.zip/\1/'` $1;;
-      *.Z)         uncompress $1  ;;
-      *.7z)        7z x $1        ;;
+      *.tar.bz2)   tar xvjf "$1"    ;;
+      *.tar.gz)    tar xvzf "$1"    ;;
+      *.tar.xz)    tar Jxvf "$1"    ;;
+      *.bz2)       bunzip2 "$1"     ;;
+      *.rar)       rar x "$1"       ;;
+      *.gz)        gunzip "$1"      ;;
+      *.tar)       tar xvf "$1"     ;;
+      *.tbz2)      tar xvjf "$1"    ;;
+      *.tgz)       tar xvzf "$1"    ;;
+      *.zip)       unzip -d `echo "$1" | sed 's/\(.*\)\.zip/\1/'` "$1";;
+      *.Z)         uncompress "$1"  ;;
+      *.7z)        7z x "$1"        ;;
       *)           echo "don't know how to extract '$1'" ;;
     esac
   else
@@ -53,7 +53,7 @@ extract ()
 #duplicate app\Models\Department.php Department WorkArea
 
 escape_special_characters() {
-    local str="$@"
+    local str="$*"
     local escaped_str=""
 
     for (( i=0; i<${#str}; i++ )); do
@@ -85,8 +85,8 @@ replacex()
 
   # -i does not seem to work in bash
   echo "s~${find}~${replace}~"
-  sed -e "s~${find}~${replace}~" ${file} > tmp.txt
-  mv tmp.txt ${file}
+  sed -e "s~${find}~${replace}~" "$file" > tmp.txt
+  mv tmp.txt "$file"
 }
 
 replace()
@@ -110,7 +110,7 @@ duplicate()
   cp "$source_file" "$dest_file"
   sed -i -e "s/$search/$replace/g" "$dest_file"
 #  sed -e "s/$search/$replace/g" "source_file" > "$dest_file"
-  rm $dest_file-e
+  rm "${dest_file}-e"
 }
 
 #run like:
@@ -151,18 +151,18 @@ duplicate_all()
   fi
 
   echo 'Check these files before they are duplicated:'
-  for file in ${duplicate_files[@]};
+  for file in "${duplicate_files[@]}";
   do
-    echo $file 2;
+    echo "$file" 2;
   done
 
 #  read "?Press enter to continue"
 
-  for file in ${duplicate_files[@]}
+  for file in "${duplicate_files[@]}"
   do
-    for replacement in ${duplicate_replacements[@]}
+    for replacement in "${duplicate_replacements[@]}"
     do
-      duplicate $file $search $replacement
+      duplicate "$file" "$search" "$replacement"
     done
   done
 }
