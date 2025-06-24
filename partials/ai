@@ -1,0 +1,31 @@
+alias l3='llama3'
+
+llama3() {
+  prompt=$*
+  ollama run llama3 $prompt
+}
+
+deep() {
+  ollama run deepseek-coder-v2 $*
+}
+
+# get latest open AI models
+# ff -d > current-models.txt
+
+best-for() {
+  ll current-models.txt
+  action=$*
+  (ee which model is best for $action?; cat current-models.txt; ee just return the name and number for the top 3) | ff
+}
+
+fast() {
+  model=gpt-4-turbo-2024-04-09
+  ff -m $model -s -- $*
+}
+
+codec() {
+  model=codex-mini-latest
+  ff -m $model -s -- $*
+}
+
+

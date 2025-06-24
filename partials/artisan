@@ -21,6 +21,7 @@ alias arev='a route:list -vvv'
 
 alias rseed='a rudder:seed continuous_seeder'
 
+alias pest='vendor/bin/pest'
 alias phpunit="vendor/bin/phpunit"
 alias utest="phpunit"
 
@@ -30,6 +31,12 @@ duskf()
 {
     tmp=$*
     a dusk --filter="$tmp"
+}
+
+pestf()
+{
+    tmp=$*
+    pest --filter="$tmp"
 }
 
 utestf()

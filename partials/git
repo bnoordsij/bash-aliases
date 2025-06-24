@@ -128,10 +128,18 @@ gtclmod()
 
 gtchrel()
 {
+    gtchd -q;
+    gtpl -q;
+    release=$(git branch -a | grep remotes/origin/release | sort -Vr | head -1 | sed 's~remotes/origin/~~');
+    gtch $release;
+}
+
+gtchrel2()
+{
     out=$(gtchd)
     out=$(gtpl)
     release=
-    git branch -a | grep remotes/origin/release | tail -1 | sed 's~remotes/origin/~~' | read release
+    git branch -a | grep remotes/origin/release | sort -Vr | head -1 | sed 's~remotes/origin/~~' | read release
     if [[ -z $release ]]; then
 #        echo No release branch found;
         git_checkout_latest_release

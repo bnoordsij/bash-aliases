@@ -13,6 +13,7 @@ alias nncj='nn +33 composer.json'
 alias nncl='nn composer.lock'
 alias nn.='nn .env'
 
+alias k='kubectl'
 alias kk='kubectl'
 alias ekk='eksctl'
 
@@ -28,6 +29,8 @@ dkbtr () {
   docker build . -t $name && docker "$name";
 }
 
+alias wah='npm run watch'
+
 alias nnchact='nn +5 changelogs/action.jobs-base.md'
 alias nnchasw='nn +5 changelogs/aswatson-base.md'
 
@@ -37,7 +40,8 @@ alias grep='ggrep'
 alias week="date +%V"
 alias now='date +"%T"'
 
-alias tf='terraform'
+alias tf='tofu'
+#alias tf='terraform'
 alias tfaaa='tf apply -auto-approve'
 alias tfddd='tf apply -auto-approve -destroy'
 
@@ -73,6 +77,10 @@ alias forerr='echo "$dir" >> ../for_error'
 alias rmf='rm -rf '
 
 alias mkhor='mkdir -p ./vendor/laravel/horizon/public'
+
+kkns() {
+  kk config set-context --current --namespace=$*
+}
 
 uniqify() {
   sentence=$*
@@ -116,3 +124,15 @@ alias forgtpl='for dir in $(lsd); do cd $dir && echopu $dir; gtpl; ..; done;'
 alias forgtups='for dir in $(lsd); do cd $dir && echopu $dir; gtups; ..; done;'
 alias forfun='for dir in $(lsd); do cd $dir && echopu $dir; tmpfun; ..; done;'
 alias forfile='for dir in $(cat $lsd_file); do cd $dir && echopu $dir; tmpfun; ..; done;'
+
+# still working on this one
+forf () {
+  for dir in $(lsd); #(cat $lsd_file)
+  do
+    cd $dir;
+    echocn $dir;
+    $($*);
+    cd -;
+  done
+}
+
