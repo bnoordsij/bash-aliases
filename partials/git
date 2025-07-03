@@ -31,6 +31,8 @@ alias gtchtm='git checkout --track origin/master '
 alias gtplbm='git pull base master'
 
 alias gtrbf='git config pull.rebase false'
+alias gtname='git config --global user.name '
+alias gtemail='git config --global user.email '
 
 alias gtrest='git restore --staged'
 
