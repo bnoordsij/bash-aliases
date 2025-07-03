@@ -2,21 +2,28 @@
 These are some aliases / functions that I use to make my life easier, you might find some useful, some not so much
 
 ## Getting started
-
+I recommend placing the scripts in your code / scripts folder, not directly in ~,
+Just make a symlink, you can do this per person or in root
 ```bash
-cd ~
-git clone git@github.com:bnoordsij/bash-aliases.git bash-aliases
+cd ~/scripts
+git clone git@github.com:bnoordsij/bash-aliases.git
+
+# asuming you want to set it for root as well
+sudo su
+
+# symlink
+ln -s ~/code/scripts/bash-aliases ~/bash-alias
+
+# add aliases in startup script
+vi +999 ~/.bashrc
+# vi +999 ~/.profile # for mac
 ```
 
-in .profile or .bashrc
-`source ~/bash-aliases/main`
-
-### alternative place
-you can clone the repo in a different place, let's say ~/code/scripts/bash-aliases
-in that case you must make a symlink to the folder, otherwise the relations won't work
-```bash
-ln -s ~/code/scripts/bash-aliases ~/bash-aliases
+add the following in `.profile` or `.bashrc`
 ```
+source ~/bash-alias/main
+```
+
 
 ## cd
 there used to be a file called cd, it contained specific aliases for cd'ing to certain folders, but only for my Mac
