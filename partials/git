@@ -105,25 +105,7 @@ gtac()
 gtcl()
 {
     tmp=$*
-    git clone "git@git.maximum.nl:$tmp";
-}
-
-gtclk()
-{
-    tmp=$*
-    git clone "git@git.maximum.nl:klanten/$tmp";
-}
-
-gtclpkg()
-{
-    tmp=$*
-    git clone "git@git.maximum.nl:laravel-packages/$tmp";
-}
-
-gtclmod()
-{
-    tmp=$*
-    git clone "git@git.maximum.nl:ruddercms/$tmp";
+    git clone "git@github.com:$tmp";
 }
 
 gtchrel()
