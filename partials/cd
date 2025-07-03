@@ -11,24 +11,6 @@ alias cddocs='cd /Users/bart/Documents/; '
 
 alias cdmain='cd /Users/bart/dev/klanten; '
 alias cddev='cd /Users/bart/dev/; '
-alias cdmod='cd /Users/bart/dev/ruddercms/modulestest/vendor/laravel-modules/; '
-alias cdpkg='cd /Users/bart/dev/ruddercms/packagestest/vendor/maximum/; '
-alias cdklant='cd /Users/bart/dev/ruddercms/klantentest/projects/; '
-
-alias cdvz='cd /Users/bart/dev/klanten/careers.vodafoneziggo.com; '
-alias cdtu='cd /Users/bart/dev/klanten/werkenbijtechnischeunie.nl; '
-alias cddef='cd /Users/bart/dev/klanten/werkenbijdefensie.nl; '
-alias cdbel='cd /Users/bart/dev/klanten/werkenbijdebelastingdienst.nl; '
-alias cdtoe='cd /Users/bart/dev/klanten/werkenbijtoeslagen.nl.api; '
-alias cddelo='cd /Users/bart/dev/klanten/werkenbijdeloitte.nl; '
-alias cddnb='cd /Users/bart/dev/klanten/werkenbijdnb.nl; '
-alias cdhop='cd /Users/bart/dev/klanten/werkenbijhoppenbrouwers.nl.api; '
-alias cddo='cd /Users/bart/dev/klanten/werkenbijdedouane.nl; '
-alias cddou='cd /Users/bart/dev/klanten/werkenbijdedouane.nl; '
-alias cdasw='cd /Users/bart/dev/children/aswatson; '
-alias cdac='cd /Users/bart/dev/children/action; '
-alias cdan='cd /Users/bart/dev/children/action/action/nl.action.jobs; '
-alias cdxx='cd /Users/bart/dev/klanten/; '
 
 alias cdec2='cd /Users/bart/dev/scripts/tof/ec2'
 
@@ -41,13 +23,6 @@ alias cdrfeed='cd ./vendor/maximum/feed; '
 alias cdrsec='cd ./vendor/maximum/secure-headers; '
 
 alias cdrcore='cd ./vendor/laravel-modules/core; '
-alias cdrcomp='cd ./vendor/laravel-modules/component; '
-alias cdrvac='cd ./vendor/laravel-modules/vacancy; '
-alias cdrpage='cd ./vendor/laravel-modules/page; '
-alias cdrevent='cd ./vendor/laravel-modules/event; '
-alias cdrnews='cd ./vendor/laravel-modules/newsletter; '
-alias cdrroute='cd ./vendor/laravel-modules/routing; '
-alias cdrminfin='cd ./vendor/maximum-clients/minfin-ats-connection'
 
 function ccd
 {
