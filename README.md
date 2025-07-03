@@ -5,6 +5,7 @@ These are some aliases / functions that I use to make my life easier, you might 
 I recommend placing the scripts in your code / scripts folder, not directly in ~,
 Just make a symlink, you can do this per person or in root
 ```bash
+mkdir -p ~/scripts
 cd ~/scripts
 git clone git@github.com:bnoordsij/bash-aliases.git
 
@@ -12,7 +13,7 @@ git clone git@github.com:bnoordsij/bash-aliases.git
 sudo su
 
 # symlink
-ln -s ~/code/scripts/bash-aliases ~/bash-alias
+ln -s ~/scripts/bash-aliases ~/bash-alias
 
 # add aliases in startup script
 vi +999 ~/.bashrc
