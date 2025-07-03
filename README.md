@@ -7,10 +7,6 @@ Just make a symlink, you can do this per person or in root
 ```bash
 mkdir -p ~/scripts
 cd ~/scripts
-git clone git@github.com:bnoordsij/bash-aliases.git
-
-# asuming you want to set it for root as well
-sudo su
 
 # symlink
 ln -s ~/scripts/bash-aliases ~/bash-alias
@@ -25,6 +21,7 @@ add the following in `.profile` or `.bashrc`
 source ~/bash-alias/main
 ```
 
+if you want the aliases to work in root as well, just run `sudo su` and redo the last steps
 
 ## cd
 there used to be a file called cd, it contained specific aliases for cd'ing to certain folders, but only for my Mac
