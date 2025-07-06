@@ -17,6 +17,8 @@ alias k='kubectl'
 alias kk='kubectl'
 alias ekk='eksctl'
 
+alias py='python3'
+
 alias dcmp='docker-compose'
 alias dcmpup='dcmp up -d' # for reference
 alias dcmpdown='dcmp down' # for reference

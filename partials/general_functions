@@ -9,14 +9,8 @@ cpenv()
     app_domain="${project_name}.test"
     app_slug=$(echo "${project_name}" | perl -pe 's/(_|\.)/-/g')
 
-    sed -i '' "s/\[APP_NAME\]/${project_name}/g" .env
-    sed -i '' "s/\[APP_SLUG\]/${app_slug}/g" .env
-    sed -i '' "s/\[APP_DOMAIN\]/${app_domain}/g" .env
-    sed -i '' "s/\[DB_DATABASE\]/${app_slug}/g" .env
-    sed -i '' "s/\[MAIL_FROM_ADDRESS\]/${app_slug}\@maximum.nl/g" .env
-    sed -i '' "s/\[MAIL_FROM_NAME\]/${app_slug}/g" .env
-    sed -i '' "s/\[DATABASE_DUMPER_READ_KEY\]/Z4FIK87GKRVR1DQ32V0G/g" .env
-    sed -i '' "s/\[DATABASE_DUMPER_READ_SECRET\]/00CxNnJd5DCaGxv0i9skmcMPJOzG5UgesnKF4p1e/g" .env
+    replace .env '[APP_NAME]' $project_name
+    replace .env '[APP_SLUG]' $app_slug
 }
 
 function tt
