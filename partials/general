@@ -32,6 +32,7 @@ dkbtr () {
 }
 
 alias wah='npm run watch'
+alias nbm='npm run build'
 
 alias nnchact='nn +5 changelogs/action.jobs-base.md'
 alias nnchasw='nn +5 changelogs/aswatson-base.md'
