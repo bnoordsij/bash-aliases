@@ -15,7 +15,17 @@ cpenv()
 
 function tt
 {
-   now; $1; now
+   if [[ -n $time ]]; then
+      echocn $(now): $(($(date +%s) - $time))sec;
+   else
+      echocn $(now)
+   fi
+   time=$(date +%s)
+}
+
+rg_raw() {
+   regex=$*
+   rg "$regex" | sed -E "s~.*$regex.*~\1~" | sort | uniq
 }
 
 # Extract many files with one command

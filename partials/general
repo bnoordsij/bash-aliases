@@ -85,6 +85,11 @@ kkns() {
   kk config set-context --current --namespace=$*
 }
 
+venv() {
+  py -m venv venv
+  source venv/bin/activate
+}
+
 uniqify() {
   sentence=$*
   echo "$sentence" | tr "[:upper:]" "[:lower:]" | tr ' ' '\n' | sort | uniq
