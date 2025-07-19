@@ -38,7 +38,7 @@ alias nnchact='nn +5 changelogs/action.jobs-base.md'
 alias nnchasw='nn +5 changelogs/aswatson-base.md'
 
 # overwrite grep with latest ggrep
-alias grep='ggrep'
+# alias grep='ggrep'
 
 alias week="date +%V"
 alias now='date +"%T"'
