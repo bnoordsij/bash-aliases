@@ -23,6 +23,16 @@ function tt
    time=$(date +%s)
 }
 
+mailhog() {
+    # global install MailHog
+    # go install github.com/mailhog/MailHog
+    ~/go/bin/MailHog
+
+    # curl 0.0.0.0:8025 works, but it's not accessible from windows
+    ip addr | grep 'inet ' | grep eth0 | sed 's~/20.*~:8025~' | sed 's~172~http://172~'
+    # inet http://172.24.25.132:8025
+}
+
 rg_raw() {
    regex=$*
    rg "$regex" | sed -E "s~.*$regex.*~\1~" | sort | uniq
