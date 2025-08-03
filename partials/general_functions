@@ -23,6 +23,20 @@ function tt
    time=$(date +%s)
 }
 
+qdeploy() {
+   are;
+   a optimize;
+   a migrate --force;
+   a queue:restart;
+}
+
+full-deploy() {
+   ci;
+   qdeploy;
+   npm ci;
+   nbm;
+}
+
 rg_raw() {
    regex=$*
    rg "$regex" | sed -E "s~.*$regex.*~\1~" | sort | uniq
