@@ -37,6 +37,14 @@ full-deploy() {
    nbm;
 }
 
+mailhog() {
+    # global install MailHog
+    # go install github.com/mailhog/MailHog
+
+    # just make sure mailhog.test is set in hosts
+    ~/go/bin/MailHog -ui-bind-addr mailhog.test:8026
+}
+
 rg_raw() {
    regex=$*
    rg "$regex" | sed -E "s~.*$regex.*~\1~" | sort | uniq
