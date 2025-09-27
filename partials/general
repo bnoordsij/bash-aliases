@@ -86,7 +86,7 @@ kkns() {
 }
 
 venv() {
-  py -m venv venv
+  [ -d 'venv' ] || py -m venv venv
   source venv/bin/activate
 }
 

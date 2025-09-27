@@ -13,6 +13,13 @@ cpenv()
     replace .env '[APP_SLUG]' $app_slug
 }
 
+mtouch()
+{
+  touch_dir=$1
+  mkdir -p ${touch_dir%/*}
+  touch $touch_dir
+}
+
 function tt
 {
    if [[ -n $time ]]; then
@@ -21,6 +28,13 @@ function tt
       echocn $(now)
    fi
    time=$(date +%s)
+}
+
+restart()
+{
+    sudo systemctl restart nginx
+    sudo systemctl restart php8.4-fpm
+    sudo systemctl restart mysql 
 }
 
 qdeploy() {
@@ -45,9 +59,14 @@ mailhog() {
     ~/go/bin/MailHog -ui-bind-addr mailhog.test:8026
 }
 
+rg_trans() {
+   rg_raw "__\('(.*)'\)" $1;
+}
+
 rg_raw() {
-   regex=$*
-   rg "$regex" | sed -E "s~.*$regex.*~\1~" | sort | uniq
+   regex=$1
+   regex_path=$2
+   rg "$regex" $regex_path | sed -E "s~.*$regex.*~\1~" | sort | uniq
 }
 
 # Extract many files with one command
@@ -111,7 +130,8 @@ replacex()
 
   # -i does not seem to work in bash
   echo "s~${find}~${replace}~"
-  sed -e "s~${find}~${replace}~" "$file" > tmp.txt
+  sed "s~${find}~${replace}~" "$file" > tmp.txt
+  mkdir -p ${file%/*}
   mv tmp.txt "$file"
 }
 
@@ -130,13 +150,14 @@ duplicate()
   search="$2"
   replace="$3"
 
-  dest_file="${source_file/$search/$replace}"
+  #dest_file="${source_file/$search/$replace}"
+  dest_file=$(ee $source_file | sed "s~$search~$replace~g")
 
   # Copy the file and replace all instances of Department with Company in the destination file
-  cp "$source_file" "$dest_file"
-  sed -i -e "s/$search/$replace/g" "$dest_file"
-#  sed -e "s/$search/$replace/g" "source_file" > "$dest_file"
-  rm "${dest_file}-e"
+  mkdir -p ${dest_file%/*}
+  cp  "$source_file" "$dest_file"
+  sed "s/$search/$replace/g" "$dest_file" > tmp.txt
+  mv tmp.txt $dest_file
 }
 
 #run like:
