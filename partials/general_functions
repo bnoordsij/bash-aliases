@@ -60,7 +60,7 @@ mailhog() {
 }
 
 rg_trans() {
-   rg_raw "__\('(.*)'\)" $1;
+   rg_raw "__\('(.*?)'\)" $1;
 }
 
 rg_raw() {
