@@ -60,13 +60,13 @@ mailhog() {
 }
 
 rg_trans() {
-   rg_raw "__\('(.*?)'\)" $1;
+   rg_raw "__\('(.+?)'\)" $1;
 }
 
 rg_raw() {
    regex=$1
    regex_path=$2
-   rg "$regex" $regex_path | sed -E "s~.*$regex.*~\1~" | sort | uniq
+   rg -NI ".*$regex.*" $regex_path -r '$1' | sort | uniq
 }
 
 # Extract many files with one command

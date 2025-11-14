@@ -50,11 +50,8 @@ alias tfddd='tf apply -auto-approve -destroy'
 
 alias chrom='~/dev/scripts/bin/chromedriver/chromedriver'
 alias chrom95='~/dev/scripts/bin/chromedriver/chromedriver --port=9515'
-alias init='~/dev/scripts/bin/rudder_init.sh'
-alias search='~/dev/scripts/bin/rudder_search.sh'
-#alias search='~/dev/scripts/ci/helper-scripts/rudder_search.sh'
-alias rs='search'
 
+alias rgf='rg -i -F '
 alias rgg='rg ">>>>>>" -m 3 || echogn "rg all good"'
 alias rgga='rg -. ">>>>>>" -m 3 || echogn "rg -. all good"'
 
