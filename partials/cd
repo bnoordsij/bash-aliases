@@ -12,17 +12,12 @@ alias cddocs='cd /Users/bart/Documents/; '
 alias cdmain='cd /Users/bart/dev/klanten; '
 alias cddev='cd /Users/bart/dev/; '
 
-alias cdec2='cd /Users/bart/dev/scripts/tof/ec2'
+
+alias cddown='cd /mnt/d/Users/bartn/Downloads; '
+alias cddocs='cd /mnt/d/Users/bartn/Documents; '
+alias cdobs='cd /mnt/d/Users/bartn/Documents/Obsidian; '
 
 ## relative
-alias cdrmod='cd ./vendor/laravel-modules; '
-alias cdrpkg='cd ./vendor/maximum; '
-
-alias cdrsite='cd ./vendor/maximum/sitemap; '
-alias cdrfeed='cd ./vendor/maximum/feed; '
-alias cdrsec='cd ./vendor/maximum/secure-headers; '
-
-alias cdrcore='cd ./vendor/laravel-modules/core; '
 
 function ccd
 {

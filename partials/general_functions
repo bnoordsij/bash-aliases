@@ -33,8 +33,9 @@ function tt
 restart()
 {
     sudo systemctl restart nginx
-    sudo systemctl restart php8.4-fpm
     sudo systemctl restart mysql 
+    sudo systemctl restart php8.4-fpm
+    sudo systemctl restart php8.5-fpm
 }
 
 qdeploy() {

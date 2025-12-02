@@ -22,6 +22,8 @@ alias cwhynl12='composer why-not laravel/framework 12'
 
 alias clu='composer update --no-install --no-scripts'
 
+alias cca='composer clean-all'
+
 alias cb='composer bump'
 
 alias cbr='cb; perl -i -pe "s~(\d+\.\d+)\.\d+~\$1~g unless /\"php\"/" composer.json'
