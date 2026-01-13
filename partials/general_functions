@@ -38,6 +38,19 @@ restart()
     sudo systemctl restart php8.5-fpm
 }
 
+ctr()
+{
+    rg_trans . > tmp.txt
+    composer trans
+    json_format resources/lang/*.json
+}
+
+json_format()
+{
+    json_file=$1
+    python3 -m json.tool $json_file --sort-keys > tmp.json && mv tmp.json $json_file
+}
+
 qdeploy() {
    are;
    a optimize;
@@ -61,7 +74,7 @@ mailhog() {
 }
 
 rg_trans() {
-   rg_raw "__\('(.+?)'\)" $1;
+   rg_raw "__\('(.+?)'[,)]" $1;
 }
 
 rg_raw() {
