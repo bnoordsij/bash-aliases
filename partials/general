@@ -48,10 +48,17 @@ alias tf='tofu'
 alias tfaaa='tf apply -auto-approve'
 alias tfddd='tf apply -auto-approve -destroy'
 
+tfenv() {
+  set -a; # not sure what this does, but it is needed to run tfaaa successfully after
+  . .env
+  set +a
+}
+
 alias chrom='~/dev/scripts/bin/chromedriver/chromedriver'
 alias chrom95='~/dev/scripts/bin/chromedriver/chromedriver --port=9515'
 
 alias rgf='rg -i -F '
+alias rff='rgf'
 alias rgg='rg ">>>>>>" -m 3 || echogn "rg all good"'
 alias rgga='rg -. ">>>>>>" -m 3 || echogn "rg -. all good"'
 
@@ -62,6 +69,7 @@ alias nnini='sudo nano /usr/local/etc/php/8.1/php.ini'
 alias nncliini='sudo nano /usr/local/etc/php/8.1/php-cli.ini'
 alias nncini='sudo nano /usr/local/etc/php/8.1/php-cli.ini'
 
+alias allm='~/AnythingLLMDesktop.AppImage'
 alias clrnwidart='nano +203 ./vendor/nwidart/laravel-modules/src/FileRepository.php'
 
 alias gw='npm run watch'
@@ -94,14 +102,17 @@ uniqify() {
 
 ## assumes "$source" is set
 mvr() {
+  [ -z $source ] && echord '$source' is not set && return 1;
   mv_file=$0
   mv "$source$mv_file" "$mv_file"
 }
 
 cpr() {
-  cp_file=$0
-  echo "$source1"
-  cp "$source1$cp_file" "$cp_file"
+  [ -z $source ] && echord '$source' is not set && return 1; 
+  cp_file=./$1
+  echo "$source""$1"
+  mkdir -p ${cp_file%/*};
+  cp "$source$cp_file" "$cp_file"
 }
 
 BLACK='\033[0;30m'
@@ -128,7 +139,8 @@ alias forgtrh='for dir in $(lsd); do cd $dir && echopu $dir; gtrh; gtchd; gtpl; 
 alias forgtpl='for dir in $(lsd); do cd $dir && echopu $dir; gtpl; ..; done;'
 alias forgtups='for dir in $(lsd); do cd $dir && echopu $dir; gtups; ..; done;'
 alias forfun='for dir in $(lsd); do cd $dir && echopu $dir; tmpfun; ..; done;'
-alias forfile='for dir in $(cat $lsd_file); do cd $dir && echopu $dir; tmpfun; ..; done;'
+alias forlsdfile='for dir in $(cat $lsd_file); do cd $dir && echopu $dir; tmpfun; ..; done;'
+alias forfiles='for file in $(cat $ls_file); do echopu $file; tmpfun; done;'
 
 # still working on this one
 forf () {

@@ -11,6 +11,7 @@ source ~/bash-alias/partials/general_functions
 source ~/bash-alias/partials/git
 source ~/bash-alias/partials/rector
 source ~/bash-alias/partials/ai
+source ~/bash-alias/partials/py
 
 if [ -f ~/bash-alias/partials/cd ]; then
     source ~/bash-alias/partials/cd

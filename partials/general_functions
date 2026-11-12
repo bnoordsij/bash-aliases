@@ -111,6 +111,15 @@ extract ()
 #duplicate $file $search $replace
 #duplicate app\Models\Department.php Department WorkArea
 
+# filter_lines domains.txt .it
+filter_lines() {
+    filename=$1
+    substr=$2
+    #echogn $filename $substr
+    grep -v "$substr" $filename > tmp.txt && mv tmp.txt $filename
+}
+
+
 escape_special_characters() {
     local str="$*"
     local escaped_str=""
@@ -228,3 +237,17 @@ duplicate_all()
   done
 }
 
+# alias sbx="/mnt/c/Users/bartn/AppData/Local/DockerSandboxes/bin/sbx.exe"
+# alias sbx="sbx.exe"
+sbx() { command sbx.exe "$@"; }
+
+sbx_fun() {
+    # $ which sbx
+    /mnt/c/Users/bartn/AppData/Local/DockerSandboxes/bin/sbx.exe "$@"
+
+    # reset BG color (doesn't actually work...)
+    printf "\033[0m"
+    clear -x
+}
+
+#

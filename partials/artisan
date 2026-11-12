@@ -3,8 +3,6 @@ alias p='php '
 alias a='php artisan '
 alias art='a '
 
-alias alr='a lock:release'
-alias alrv='a lock:release connection_manager_run'
 alias akey='a key:generate'
 alias avp='a vendor:publish '
 alias acc='a cache:clear'

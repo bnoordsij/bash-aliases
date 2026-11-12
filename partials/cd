@@ -13,9 +13,9 @@ alias cdmain='cd /Users/bart/dev/klanten; '
 alias cddev='cd /Users/bart/dev/; '
 
 
-alias cddown='cd /mnt/d/Users/bartn/Downloads; '
-alias cddocs='cd /mnt/d/Users/bartn/Documents; '
-alias cdobs='cd /mnt/d/Users/bartn/Documents/Obsidian; '
+alias cddown='cd /mnt/c/Users/bartn/Downloads; '
+alias cddocs='cd /mnt/c/Users/bartn/Documents; '
+alias cdobs='cd /mnt/c/Users/bartn/Documents/Obsidian; '
 
 ## relative
 
