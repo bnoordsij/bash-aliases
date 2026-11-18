@@ -1,0 +1,4 @@
+alias pym='py manage.py'
+
+alias pymr='pym runserver'
+alias pymm='pym migrate'
